@@ -15,6 +15,32 @@ Using your tool of choice, answer the following questions:
 
 I have created a flask app to render different pages to answer the above questions.
 
+# Running locally
+
+1. Freeze pip / conda requirements
+
+   ```
+   python -m pip list --format=freeze > requirements.txt
+   ```
+
+2. Create the environment using
+
+   ```
+   conda create -n <env> --file requirements.txt
+   ```
+
+3. Run the app using:
+
+   ```
+   python app.py
+   ```
+
+   OR
+
+   ```
+   flask run
+   ```
+
 # Deploying to Heroku
 
 1. Freeze pip / conda requirements
@@ -23,7 +49,14 @@ I have created a flask app to render different pages to answer the above questio
    python -m pip list --format=freeze > requirements.txt
    ```
 
-2. Update `Procfile` to use gunicorn to run the web server and set app.py as the application to run:
+2. Create/Update `Procfile` to use gunicorn to run the web server and set app.py as the application to run:
+
    ```
    web: gunicorn app:app
+   ```
+
+3. Create/Update `runtime.txt` to contain:
+
+   ```
+   python-3.7.10
    ```
