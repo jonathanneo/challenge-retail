@@ -1,7 +1,6 @@
 
 
-var metric = "Revenue"
-var years = ["2004", "2005", "2006", "2007"]
+
 
 function sortObject(unsorted){
     var sortedlist = Object.keys(unsorted).sort(function(a,b){return unsorted[a]-unsorted[b]});
@@ -13,7 +12,7 @@ function sortObject(unsorted){
 }
 
 
-$.get(`/api/timeseries/${metric.toLowerCase()}/${years}`, (res) => {
+var renderTimeseries = (metric, years) => $.get(`/api/timeseries/${metric.toLowerCase()}/${years}`, (res) => {
     var year = Object.keys(res);
     var metricValue = Object.values(res);
     var data = [
@@ -41,7 +40,7 @@ $.get(`/api/timeseries/${metric.toLowerCase()}/${years}`, (res) => {
 });
 
 
-$.get(`/api/country/${metric.toLowerCase()}/${years}`, (res) => {
+var renderCountry = (metric, years) => $.get(`/api/country/${metric.toLowerCase()}/${years}`, (res) => {
     
     var resSorted = sortObject(res);
     var country = Object.keys(resSorted);
@@ -71,7 +70,7 @@ $.get(`/api/country/${metric.toLowerCase()}/${years}`, (res) => {
     Plotly.newPlot('country', data, layout);
 });
 
-$.get(`/api/channel/${metric.toLowerCase()}/${years}`, (res) => {
+var renderChannel = (metric, years) => $.get(`/api/channel/${metric.toLowerCase()}/${years}`, (res) => {
     
     var resSorted = sortObject(res);
     var channel = Object.keys(resSorted);
@@ -101,7 +100,7 @@ $.get(`/api/channel/${metric.toLowerCase()}/${years}`, (res) => {
     Plotly.newPlot('channel', data, layout);
 });
 
-$.get(`/api/product/${metric.toLowerCase()}/${years}`, (res) => {
+var renderProduct = (metric, years) => $.get(`/api/product/${metric.toLowerCase()}/${years}`, (res) => {
     
     var resSorted = sortObject(res);
     var product = Object.keys(resSorted);
@@ -129,4 +128,22 @@ $.get(`/api/product/${metric.toLowerCase()}/${years}`, (res) => {
       };
     
     Plotly.newPlot('product', data, layout);
+});
+
+$("#yearSelector").change(() =>{
+    var years = $("#yearSelector").val();
+    var metric = "Revenue"
+    renderTimeseries(metric, years);
+    renderCountry(metric, years);
+    renderChannel(metric, years);
+    renderProduct(metric, years);
+});
+
+$(document).ready(()=>{
+    var metric = "Revenue"
+    var years = ["2004", "2005", "2006", "2007"]
+    renderTimeseries(metric, years);
+    renderCountry(metric, years);
+    renderChannel(metric, years);
+    renderProduct(metric, years);
 });

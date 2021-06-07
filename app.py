@@ -1,4 +1,4 @@
-from flask import Flask, session, request, redirect, render_template, jsonify
+from flask import Flask, session, request, redirect, render_template
 import pandas as pd 
 import os 
 import json 
