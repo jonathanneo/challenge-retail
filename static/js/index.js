@@ -29,7 +29,7 @@ var renderTimeseries = (metric, years) => $.get(`/api/timeseries/${metric.toLowe
     var layout = {
         title: `${metric} Time Series`,
         yaxis: {
-            title: `${metric} ($ Billions)`
+            title: `${metric} ($)`
         },
         xaxis: {
             title: `Year`
@@ -60,7 +60,7 @@ var renderCountry = (metric, years) => $.get(`/api/country/${metric.toLowerCase(
     var layout = {
         title: `${metric} by Country`,
         xaxis: {
-            title: `${metric} ($ Millions)`
+            title: `${metric} ($)`
         },
         yaxis: {
             title: `Country`
@@ -90,7 +90,7 @@ var renderChannel = (metric, years) => $.get(`/api/channel/${metric.toLowerCase(
     var layout = {
         title: `${metric} by Channel`,
         xaxis: {
-            title: `${metric} ($ Billions)`
+            title: `${metric} ($)`
         },
         yaxis: {
             title: `Channel`
@@ -120,7 +120,7 @@ var renderProduct = (metric, years) => $.get(`/api/product/${metric.toLowerCase(
     var layout = {
         title: `${metric} by Top 10 Products`,
         xaxis: {
-            title: `${metric} ($ Millions)`
+            title: `${metric} ($)`
         },
         yaxis: {
             title: `Product`
@@ -132,7 +132,16 @@ var renderProduct = (metric, years) => $.get(`/api/product/${metric.toLowerCase(
 
 $("#yearSelector").change(() =>{
     var years = $("#yearSelector").val();
-    var metric = "Revenue"
+    var metric = $("#metricSelector").val();
+    renderTimeseries(metric, years);
+    renderCountry(metric, years);
+    renderChannel(metric, years);
+    renderProduct(metric, years);
+});
+
+$("#metricSelector").change(() =>{
+    var years = $("#yearSelector").val();
+    var metric = $("#metricSelector").val();
     renderTimeseries(metric, years);
     renderCountry(metric, years);
     renderChannel(metric, years);
@@ -140,8 +149,8 @@ $("#yearSelector").change(() =>{
 });
 
 $(document).ready(()=>{
-    var metric = "Revenue"
-    var years = ["2004", "2005", "2006", "2007"]
+    var metric = $("#metricSelector").val();
+    var years = $("#yearSelector").val();
     renderTimeseries(metric, years);
     renderCountry(metric, years);
     renderChannel(metric, years);
