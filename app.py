@@ -5,9 +5,10 @@ import json
 from fbprophet import Prophet
 import pickle
 import datetime as dt
+import markdown as md
 
 # create flask app
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='/static')
 
 # read in dataset
 df = pd.read_csv("retail.csv")
@@ -27,6 +28,24 @@ def index():
 @app.route("/forecast")
 def forecasted():
     return render_template("forecasted.html")
+
+# @app.route("/report")
+# def report():
+#     return render_template("report.html")
+
+@app.route("/report")
+def report():
+    filename = "report.md"
+    readme_file = open(f"articles/{filename}", "r")
+    md_template_string = md.markdown(readme_file.read())
+    return render_template("report.html", markdown=md_template_string)
+
+@app.route("/changelog")
+def changelog():
+    filename = ""
+    readme_file = open(f"changelog/{filename}", "r")
+    md_template_string = md.markdown(readme_file.read())
+    # print(md_template_string)
 
 
 @app.route("/api/timeseries/<metric>/<years>")
