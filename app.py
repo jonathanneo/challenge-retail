@@ -24,7 +24,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/forecasted")
+@app.route("/forecast")
 def forecasted():
     return render_template("forecasted.html")
 
