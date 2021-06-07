@@ -1,6 +1,7 @@
 from flask import Flask, session, request, redirect, render_template, Blueprint, jsonify
 import pandas as pd
-import os
+from os import listdir
+from os.path import isfile, join
 import json
 from fbprophet import Prophet
 import pickle
@@ -44,11 +45,17 @@ def report():
 
 @app.route("/changelog")
 def changelog():
-    filename = ""
-    readme_file = open(f"changelog/{filename}", "r")
-    md_template_string = md.markdown(readme_file.read())
-    # print(md_template_string)
+    folder = "changelog"
+    filepath = join(__file__, "..", folder)
 
+    files = [f for f in sorted(listdir(filepath), reverse=True)]
+    changelogs = []
+    for file in files: 
+        readme_file = open(f"{filepath}/{file}", "r")
+        md_template_string = md.markdown(readme_file.read())
+        changelogs.append(md_template_string)
+        
+    return render_template("changelog.html", changelogs = changelogs)
 
 @api.route("/timeseries/<metric>/<years>")
 class TimeSeries(Resource):
