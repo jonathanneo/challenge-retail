@@ -1,7 +1,3 @@
-
-
-
-
 function sortObject(unsorted){
     var sortedlist = Object.keys(unsorted).sort(function(a,b){return unsorted[a]-unsorted[b]});
     var sorted = {}
@@ -32,7 +28,8 @@ var renderTimeseries = (metric, years) => $.get(`/api/timeseries/${metric.toLowe
             title: `${metric} ($)`
         },
         xaxis: {
-            title: `Year`
+            title: `Year`,
+            tickformat: 'd'
         }
       };
     

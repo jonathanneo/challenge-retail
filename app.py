@@ -24,6 +24,11 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/forecasted")
+def forecasted():
+    return render_template("forecasted.html")
+
+
 @app.route("/api/timeseries/<metric>/<years>")
 def time_series(metric, years):
     return df[df["Year"].isin(map(int, years.split(",")))].groupby(by=["Year"]).sum()[metricMapper[metric]].to_dict()
@@ -44,8 +49,19 @@ def product(metric, years):
     return df[df["Year"].isin(map(int, years.split(",")))].groupby(by=["Product"]).sum()[metricMapper[metric]].sort_values(ascending=False).head(10).to_dict()
 
 
-@app.route("/api/predict/<country>")
-def predict(country):
+@app.route("/api/actual_revenue/<country>")
+def actual_country_revenue(country):
+    print(country)
+    return df[df["Retailer country"].str.lower() == country].groupby(by=["Year"]).sum()["Revenue"].to_dict()
+
+
+@app.route("/api/countries")
+def countries():
+    return {"countries": list(df["Retailer country"].unique())}
+
+
+@app.route("/api/forecasted_revenue/<country>")
+def forecasted_country_revenue(country):
     countryClean = country.lower().replace(" ", "")
     with open(f"model/output/{countryClean}.pkl", "rb") as f:
         m = pickle.load(f)
