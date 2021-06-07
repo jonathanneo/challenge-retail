@@ -1,6 +1,7 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: win-64
+aniso8601=9.0.1=pyhd3eb1b0_0
 argon2-cffi=20.1.0=py37h2bbff1b_1
 arviz=0.11.2=pyhd8ed1ab_1
 async_generator=1.10=py37h28b3542_0
@@ -28,6 +29,7 @@ entrypoints=0.3=py37_0
 ephem=3.7.7.1=py37he774522_0
 fbprophet=0.7.1=py37h1834ac0_0
 flask=1.1.2=pyhd3eb1b0_0
+flask-restx=0.4.0=pyhd3eb1b0_0
 freetype=2.10.4=h546665d_1
 hdf4=4.2.15=h0e5069d_3
 hdf5=1.10.6=nompi_h5268f04_1114
@@ -97,6 +99,7 @@ m2w64-tools-git=5.0.0.4592.90b8472=2
 m2w64-windows-default-manifest=6.4=3
 m2w64-winpthreads-git=5.0.0.4634.697f757=2
 m2w64-zlib=1.2.8=10
+markdown=3.3.4=py37haa95532_0
 markupsafe=2.0.1=py37h2bbff1b_0
 matplotlib-base=3.4.2=py37h0d1fb12_0
 matplotlib-inline=0.1.2=pyhd8ed1ab_2
