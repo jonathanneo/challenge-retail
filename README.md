@@ -1,4 +1,4 @@
-# The retail challenge
+# The challenge
 
 You have a file `Retail.csv` describing sales data for a hypothetical Camping Supplies store.
 Using your tool of choice, answer the following questions:
@@ -11,13 +11,19 @@ Using your tool of choice, answer the following questions:
 
 4. What additional data would you want to collect? What analyses would it empower you to run?
 
-```
-On Prompt install Ephem:
-conda install -c anaconda ephem
+# My solution
 
-Install Pystan:
-conda install -c conda-forge pystan
+I have created a flask app to render different pages to answer the above questions.
 
-Finally install Fbprophet
-conda install -c conda-forge fbprophet
-```
+# Deploying to Heroku
+
+1. Freeze pip / conda requirements
+
+   ```
+   python -m pip list --format=freeze > requirements.txt
+   ```
+
+2. Update `Procfile` to use gunicorn to run the web server and set app.py as the application to run:
+   ```
+   web: gunicorn app:app
+   ```
