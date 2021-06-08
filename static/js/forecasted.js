@@ -54,20 +54,20 @@ var renderForecasted = (country, country_actuals, country_forecasted) => {
 };
 
 $("#countrySelector").change(() =>{
-    // $("#spinner").attr("hidden",false);
-    // $("#forecasted").attr("hidden",true);
+    $("#spinner").attr("hidden",false);
+    $("#forecasted").attr("hidden",true);
     var country = $("#countrySelector").val();
         $.getJSON(`/api/actual_revenue/${country.toLowerCase()}`, (actuals_response) => { 
             $.getJSON(`/api/forecasted_revenue/${country.toLowerCase()}`, (forecasted_response) => { 
+                $("#spinner").attr("hidden",true);
+                $("#forecasted").attr("hidden",false);
                 renderForecasted(country, actuals_response, forecasted_response);
-                // $("#spinner").attr("hidden",true);
-                // $("#forecasted").attr("hidden",false);
             });
         });
 });
 
 $(document).ready( () => { 
-    // $("#spinner").attr("hidden",false);
+    $("#spinner").attr("hidden",false);
     $.get("/api/countries", (countries_response) => {
         countries_response.countries.forEach(country => {
             $("#countrySelector").append(`<option value='${country}'>${country}</option>`)
@@ -75,10 +75,9 @@ $(document).ready( () => {
         var country = $("#countrySelector").val();
         $.getJSON(`/api/actual_revenue/${country.toLowerCase()}`, (actuals_response) => { 
             $.getJSON(`/api/forecasted_revenue/${country.toLowerCase()}`, (forecasted_response) => { 
+                $("#spinner").attr("hidden",true);
                 renderForecasted(country, actuals_response, forecasted_response);
-                // $("#spinner").attr("hidden",true);
             });
         });
-        
     });
 });
