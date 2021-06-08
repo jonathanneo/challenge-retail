@@ -33,9 +33,9 @@ Forecasts are performed in real-time using an API I wrote with a fitted model us
 
 ### Report Pages
 
-![report_page_1of2a.PNG](app_sample_screenshots/report_page_1of2a.PNG)
+![report_page_1of2a.PNG](app_sample_screenshots/report_page_1of2a.png)
 
-![report_page_2of2a.PNG](app_sample_screenshots/report_page_2of2a.PNG)
+![report_page_2of2a.PNG](app_sample_screenshots/report_page_2of2a.png)
 
 This page was created by rendering markdown using [Python Markdown](https://github.com/Python-Markdown/markdown).
 
